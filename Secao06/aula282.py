@@ -35,3 +35,5 @@ caminho_arquivo, extensao_arquivo = os.path.splitext(arquivo)
 # print(os.path.abspath('.'))
 
 print(os.path.basename(caminho))
+print(os.path.basename(diretorio))
+print(os.path.dirname(caminho))

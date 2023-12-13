@@ -5,6 +5,7 @@
 # Apagar Árvore recursivamente -> shutil.rmtree
 # Apagar arquivos -> os.unlink
 # Renomear/Mover -> shutil.move ou os.renameimport os
+import os
 import shutil
 
 HOME = os.path.expanduser('~')

@@ -11,6 +11,7 @@ import math
 import os
 from itertools import count
 
+
 def formata_tamanho(tamanho_em_bytes: int, base: int = 1024) -> str:
     tamanho_final = 0
 

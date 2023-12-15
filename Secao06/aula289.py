@@ -53,4 +53,5 @@ filme: Movie = json.loads(string_json)
 
 # print(filme['characters'][0])
 
+
 print(json.dumps(filme, ensure_ascii=False, indent=2))

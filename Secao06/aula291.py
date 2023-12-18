@@ -39,9 +39,10 @@ from pathlib import Path
 caminho_arquivo = Path(__file__).parent / 'arquivo.txt'
 caminho_arquivo.touch()
 caminho_arquivo.write_text('Olá mundo!')
-caminho_arquivo.unlink()
+# caminho_arquivo.unlink()
 
 caminho_pasta = Path().parent / 'Python é legal'
+caminho_pasta.mkdir(exist_ok=True)
 
 subpasta = caminho_pasta / 'subpasta'
 subpasta.mkdir(exist_ok=True)
@@ -80,7 +81,7 @@ def rmtree(root: Path, remove_root=True):
             rmtree(file, False)
             file.rmdir()
         else:
-            print('DIR: ', file)
+            print('FILE: ', file)
             file.unlink()
 
 

@@ -15,7 +15,15 @@
 
 import os
 
-senha = os.getenv('SENHA')
+# senha = os.getenv('SENHA')
 
-print(senha)
+# print(senha)
 
+
+
+from dotenv import load_dotenv # type: ignore
+
+load_dotenv()
+
+print(os.environ)
+# print(os.getenv('BD_PASSWORD'))

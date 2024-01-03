@@ -26,4 +26,4 @@ from dotenv import load_dotenv # type: ignore
 load_dotenv()
 
 print(os.environ)
-# print(os.getenv('BD_PASSWORD'))
+print(os.getenv('BD_PASSWORD'))

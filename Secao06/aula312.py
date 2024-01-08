@@ -18,7 +18,7 @@ raw_html = response.text
 
 # print(raw_html)
 
-parsed_html = BeautifulSoup(raw_html, 'html.parser')
+parsed_html = BeautifulSoup(raw_html, 'html.parser', from_encoding='utf-8')
 
 # print(parsed_html)
 # if parsed_html.title is not None:

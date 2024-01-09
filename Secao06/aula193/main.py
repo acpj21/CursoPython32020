@@ -1,3 +1,5 @@
+# type: ignore
+# Selenium - Automatizando tarefas no navegador
 from time import sleep
 from pathlib import Path
 
@@ -8,6 +10,9 @@ from selenium.webdriver.chrome.service import Service
 # from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
@@ -23,6 +28,7 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 
 # chrome_browser.get('https://www.google.com.br/')
 # time.sleep(30)
+
 
 def make_chrome_browser(*options: str) -> webdriver.Chrome:
     chrome_options = webdriver.ChromeOptions()
@@ -43,6 +49,7 @@ def make_chrome_browser(*options: str) -> webdriver.Chrome:
 
 
 if __name__ == '__main__':
+    TIME_TO_WAIT = 10
     # Example
     # options = '--headless', '--disable-gpu',
     options = ()
@@ -51,5 +58,14 @@ if __name__ == '__main__':
     # Como antes
     browser.get('https://www.google.com')
 
+    # Espere para encontrar o input
+    search_input = WebDriverWait(browser, TIME_TO_WAIT).until(
+        EC.presence_of_element_located(
+            (By.NAME, 'q')
+        )
+    )
+
+    search_input.send_keys('Hello World!')
+
     # Dorme por 10 segundos
-    sleep(10)
+    sleep(TIME_TO_WAIT)

@@ -11,6 +11,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -66,6 +67,7 @@ if __name__ == '__main__':
     )
 
     search_input.send_keys('Hello World!')
+    search_input.send_keys(Keys.ENTER)
 
     # Dorme por 10 segundos
     sleep(TIME_TO_WAIT)

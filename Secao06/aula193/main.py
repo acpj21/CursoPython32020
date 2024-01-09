@@ -69,5 +69,12 @@ if __name__ == '__main__':
     search_input.send_keys('Hello World!')
     search_input.send_keys(Keys.ENTER)
 
+    results = browser.find_element(By.ID, 'search')
+    print(results)
+
+    links = results.find_elements(By.TAG_NAME, 'a')
+    print(links[0])
+    links[0].click()
+
     # Dorme por 10 segundos
     sleep(TIME_TO_WAIT)

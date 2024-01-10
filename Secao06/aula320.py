@@ -20,3 +20,29 @@
 # Comando de exemplo:
 # Windows: ping 127.0.0.1
 # Linux/Mac: ping 127.0.0.1 -c 4
+import subprocess
+import sys
+
+system = sys.platform
+print(system)
+
+encoding = 'utf_8'
+
+if system == "win32":
+    cmd = ['ping', '127.0.0.1']
+    encoding = 'cp850'
+
+# cmd = ['ping', '127.0.0.1', '-c', '4']
+cmd = ['ls', '-lah', '/']
+
+proc = subprocess.run(
+    cmd,
+    capture_output=True,
+    text=True,
+    encoding=encoding
+)
+
+# print(proc.args)
+# print(proc.stderr)
+print(proc.stdout)
+# print(proc.returncode)

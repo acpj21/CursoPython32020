@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from PyPDF2 import PdfReader
+from PyPDF2 import PdfReader, PdfWriter
 
 
 PASTA_RAIZ = Path(__file__).parent
@@ -23,5 +23,19 @@ imagem0 = page0.images[0]
 # print(page0.extract_text())
 # print(page0.images[0])
 
-with open(PASTA_NOVA / imagem0.name, 'wb') as fp:
-    fp.write(imagem0.data)
+# with open(PASTA_NOVA / imagem0.name, 'wb') as fp:
+#     fp.write(imagem0.data)
+
+# writer = PdfWriter()
+
+# with open(PASTA_NOVA / 'page0.pdf', 'wb') as arquivo:
+#     for page in reader.pages:
+#         writer.add_page(page0)
+
+#     writer.write(arquivo)  # type: ignore
+
+for i, page in enumerate(reader.pages):
+    writer = PdfWriter()
+    with open(PASTA_NOVA / f'page{i}.pdf', 'wb') as arquivo:
+        writer.add_page(page)
+        writer.write(arquivo)  # type: ignore

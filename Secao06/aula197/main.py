@@ -18,6 +18,10 @@ reader = PdfReader(RELATORIO_BACEN)
 #     print()
 
 page0 = reader.pages[0]
+imagem0 = page0.images[0]
 
 # print(page0.extract_text())
-print(page0.images)
+# print(page0.images[0])
+
+with open(PASTA_NOVA / imagem0.name, 'wb') as fp:
+    fp.write(imagem0.data)

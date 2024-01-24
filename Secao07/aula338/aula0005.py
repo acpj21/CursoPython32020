@@ -28,6 +28,7 @@ layout.addWidget(botao1, 1, 1, 1, 1)
 layout.addWidget(botao2, 1, 2, 1, 1)
 layout.addWidget(botao3, 3, 1, 1, 2)
 
+
 @Slot()
 def slot_example(status_bar):
     def inner():

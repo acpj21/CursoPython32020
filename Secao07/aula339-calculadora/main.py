@@ -15,10 +15,12 @@ if __name__ == '__main__':
     # window.v_layout.addWidget(label1)
     # window.adjustFixedSize()
 
-    # dEFINE O íCONE
+    # Define o ícone
     icon = QIcon(str(WINDOW_ICON_PATH))
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
 
+    # Executa tudo
+    window.adjustFixedSize()
     window.show()
     app.exec()

@@ -33,6 +33,7 @@ if __name__ == '__main__':
     display = Display()
     window.addToVLayout(display)
 
+    # Buton
     button = Button('Texto do botão')
     window.addToVLayout(button)
 

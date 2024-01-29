@@ -6,10 +6,12 @@ from main_window import MainWindow
 # from PySide6.QtWidgets import QApplication, QLabel
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
+from styles import setupTheme
 from variables import WINDOW_ICON_PATH
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    setupTheme()
     window = MainWindow()
 
     # label1 = QLabel('O meu texto')

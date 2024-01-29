@@ -26,7 +26,6 @@ if __name__ == '__main__':
     info = Info('2.0 ^10.0 = 1024.0')
     window.addToVLayout(info)
 
-
     # Display
     display = Display()
     window.addToVLayout(display)

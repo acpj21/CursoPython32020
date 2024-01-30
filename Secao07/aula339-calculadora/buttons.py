@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from display import Display
     from info import Info
+    
 
 class Button(QPushButton):
     def __init__(self, *args, **kwargs):
@@ -54,15 +55,22 @@ class ButtonsGrid(QGridLayout):
 
                 if not isNumOrDot(button_text) and not isEmpty(button_text):
                     button.setProperty('cssClass', 'specialButton')
+                    self._configSpecialButton(button)
 
                 self.addWidget(button, rowNumber, colNumber)
-                buttonSlot = self._makeButtonDisplaySlot(
-                    self._insertButtonTextToDisplay,
-                    button,
-                )
-                button.clicked.connect(buttonSlot)  # type: ignore
+                slot = self._makeSlot(self._insertButtonTextToDisplay, button)
+                self._connectButtonClicked(button, slot)
     
-    def _makeButtonDisplaySlot(self, func, *args, **kwargs):
+    def _connectButtonClicked(self, button, slot):
+        button.clicked.connect(slot)  # type: ignore
+    
+    def _configSpecialButton(self, button):
+        text = button.text()
+        
+        if text == 'C':
+            self._connectButtonClicked(button, self._clear)
+    
+    def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
         def realSlot(_):
             func(*args, **kwargs)
@@ -76,3 +84,7 @@ class ButtonsGrid(QGridLayout):
             return
 
         self.display.insert(buttonText)
+
+    def _clear(self):
+        print('Vou fazer outra coisa aqui')
+        self.display.clear()

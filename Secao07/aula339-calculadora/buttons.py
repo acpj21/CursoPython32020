@@ -170,8 +170,22 @@ class ButtonsGrid(QGridLayout):
 
     def _showError(self, text):
         msgBox = self._makeDialog(text)
+        msgBox.setInformativeText('Texto da caixa de texto.')
         msgBox.setIcon(msgBox.Icon.Critical)
-        msgBox.exec()
+        
+        msgBox.setStandardButtons(
+            msgBox.StandardButton.Cancel |
+            msgBox.StandardButton.Ok
+        )
+
+        msgBox.button(msgBox.StandardButton.Cancel).setText('Cancelar')
+
+        result = msgBox.exec()
+        
+        if result == msgBox.StandardButton.Cancel:
+            print('Cancelado')
+        else:
+            print('Ok')
 
     def _showInfo(self, text):
         msgBox = self._makeDialog(text)

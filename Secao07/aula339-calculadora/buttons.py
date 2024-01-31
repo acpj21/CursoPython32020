@@ -146,8 +146,13 @@ class ButtonsGrid(QGridLayout):
                               )
         except ZeroDivisionError:
             print('Zero Division Error')
+        except OverflowError:
+            print('Número muito grande')
 
         self.display.clear()
         self.info.setText(f'{self.equation} = {result}')
         self._left = result
         self._right = None
+        
+        if result == 'error':
+            self._left = None

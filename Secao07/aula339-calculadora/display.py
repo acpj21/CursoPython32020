@@ -24,8 +24,11 @@ class Display(QLineEdit):
         KEYS = Qt.Key
 
         isEnter = key in [KEYS.Key_Enter, KEYS.Key_Return]
+        isNumber = key in [KEYS.Key_0, KEYS.Key_1, KEYS.Key_2, KEYS.Key_3]
 
         if isEnter:
             print('Enter pressionado, sinal emitido', type(self).__name__)
             self.eqRequested.emit()
             return event.ignore()
+        else:
+            print(isNumber)

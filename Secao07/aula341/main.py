@@ -1,8 +1,24 @@
 import sys
 import time
 
+from PySide6.QtCore import QObject, Signal, Slot
 from PySide6.QtWidgets import QApplication, QWidget
 from ui_workerui import Ui_myWidget
+
+
+class Workder1(QObject):
+    started = Signal(str)
+    progressed = Signal(str)
+    finished = Signal(str)
+
+    def run(self):
+        value = '0'
+        self.started.emit(value)
+        for i in range(5):
+            value = str(i)
+            self.progressed.emit(value)
+            time.sleep(1)
+        self.finished.emit(value)
 
 
 class MyWidget(QWidget, Ui_myWidget):
@@ -14,7 +30,6 @@ class MyWidget(QWidget, Ui_myWidget):
         self.Button2.clicked.connect(self.hardWork2)
     
     def hardWork1(self):
-        time.sleep(5)
         self.label1.setText('hardWorkd1 terminado')
     
     def hardWork2(self):

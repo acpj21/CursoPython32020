@@ -20,23 +20,23 @@ cursor.execute(
 connection.commit()
 
 # Cria a tabela
-cursor.execute(
-    f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
-    '('
-    'id INTEGER PRIMARY KEY AUTOINCREMENT,'
-    'name TEXT,'
-    'weight REAL'
-    ')'
+sql = (
+    f'INSERT INTO {TABLE_NAME} '
+    '(name, weight) '
+    'VALUES '
+    '(?, ?)'
 )
+cursor.execute(sql, ['Joana', 4])
 connection.commit()
 
 # Registrar valores nas colunas da tabela
 # CUIDADO: sql injection
 cursor.execute(
     f'INSERT INTO {TABLE_NAME} '
-    '(id, name, weight) '
+    '(name, weight) '
     'VALUES '
-    '(NULL, "Helena", 4), (NULL, "Eduardo", 10)'
+    '("Helena", 4), '
+    '("Eduardo", 10)'
 )
 connection.commit()
 

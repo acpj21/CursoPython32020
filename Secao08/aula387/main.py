@@ -24,9 +24,23 @@ sql = (
     f'INSERT INTO {TABLE_NAME} '
     '(name, weight) '
     'VALUES '
-    '(?, ?)'
+    '(:nome, :peso)'
 )
-cursor.execute(sql, ['Joana', 4])
+# cursor.execute(sql, ['Joana', 4])
+# cursor.executemany(
+#     sql,
+#     (
+#         ('Joana', 4), ('Luiz', 5)
+#     )
+# )
+cursor.execute(sql, {'nome': 'Sem nome', 'peso': 3})
+cursor.executemany(sql, (
+    {'nome': 'Joãozinho', 'peso': 3},
+    {'nome': 'Maria', 'peso': 2},
+    {'nome': 'Helena', 'peso': 4},
+    {'nome': 'Joana', 'peso': 5},
+))
+
 connection.commit()
 
 # Registrar valores nas colunas da tabela
@@ -39,6 +53,7 @@ cursor.execute(
     '("Eduardo", 10)'
 )
 connection.commit()
+print(sql)
 
 cursor.close()
 connection.close()

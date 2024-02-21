@@ -34,7 +34,8 @@ with connection:
         cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')  # type: ignore
     connection.commit()
 
-    # Começo a manipular dados a partir daqui
+
+# Começo a manipular dados a partir daqui
 
 with connection.cursor() as cursor:
     cursor.execute(  # type: ignore

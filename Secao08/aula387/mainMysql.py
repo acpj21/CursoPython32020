@@ -21,7 +21,6 @@ connection = pymysql.connect(
 
 with connection:
     with connection.cursor() as cursor:
-        # SQL
         cursor.execute(  # type: ignore
             f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             'id INT NOT NULL AUTO_INCREMENT, '
@@ -34,21 +33,17 @@ with connection:
         cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')  # type: ignore
     connection.commit()
 
+    # Começo a manipular dados a partir daqui
 
-# Começo a manipular dados a partir daqui
-
-with connection.cursor() as cursor:
-    cursor.execute(  # type: ignore
-        f'INSERT INTO {TABLE_NAME} '
-        '(nome, idade) VALUES ("Luiz", 25) '
-    )
-    cursor.execute(  # type: ignore
-        f'INSERT INTO {TABLE_NAME} '
-        '(nome, idade) VALUES ("Luiz", 25) '
-    )
-    result = cursor.execute(  # type: ignore
-        f'INSERT INTO {TABLE_NAME} '
-        '(nome, idade) VALUES ("Luiz", 25) '
-    )
-    print(result)
-connection.commit()
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%s, %s) '
+        )
+        data = ('Luiz', 18)
+        result = cursor.execute(sql, data)  # type: ignore
+        print(sql, data)
+        print(result)
+    connection.commit()

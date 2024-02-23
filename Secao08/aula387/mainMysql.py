@@ -146,6 +146,7 @@ with connection:
 
     # Editando com UPDATE, WHERE e placeholders no PyMySQL
     with connection.cursor() as cursor:
+        cursor = cast(CURRENT_CURSOR, cursor)
         sql = (
             f'UPDATE {TABLE_NAME} '
             'SET nome=%s, idade=%s '

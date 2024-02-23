@@ -11,7 +11,7 @@ import pymysql
 import pymysql.cursors
 
 TABLE_NAME = 'customers'
-CURRENT_CURSOR = pymysql.cursors.SSDictCursor
+CURRENT_CURSOR = pymysql.cursors.DictCursor
 
 dotenv.load_dotenv()
 
@@ -152,18 +152,22 @@ with connection:
             'WHERE id=%s'
         )
         cursor.execute(sql, ('Eleonor', 102, 4))
-        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+        cursor.execute(
+            f'SELECT id from {TABLE_NAME} ORDER BY id DESC LIMIT 1'
+        )
+        lastIdFromSelect = cursor.fetchone()
 
-        print('For 1: ')
-        for row in cursor.fetchall_unbuffered():
-            print(row)
+        resultFromSelect = cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
 
-            if row['id'] >= 5:
-                break
+        data6 = cursor.fetchall()
 
-        print()
-        print('For 2: ')
-        # cursor.scroll(-1)
-        for row in cursor.fetchall_unbuffered():
-            print(row)
+        print('resultFromSelect', resultFromSelect)
+        print('len(data6)', len(data6))
+        print('rowcount', cursor.rowcount)
+        print('lastrowid', cursor.lastrowid)
+        print('lastrowid na mão', lastIdFromSelect)
+
+        cursor.scroll(0, 'absolute')
+        print('rownumber', cursor.rownumber)
+
     connection.commit()

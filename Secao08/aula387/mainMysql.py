@@ -4,11 +4,14 @@
 # GitHub: https://github.com/PyMySQL/PyMySQL
 
 import os
+from typing import cast
+
 import dotenv
 import pymysql
 import pymysql.cursors
 
 TABLE_NAME = 'customers'
+CURRENT_CURSOR = pymysql.cursors.SSDictCursor
 
 dotenv.load_dotenv()
 
@@ -18,7 +21,7 @@ connection = pymysql.connect(
     password=os.environ['MYSQL_PASSWORD'],
     database=os.environ['MYSQL_DATABASE'],
     charset='utf8mb4',
-    cursorclass=pymysql.cursors.DictCursor,
+    cursorclass=CURRENT_CURSOR,
 )
 
 with connection:
@@ -148,13 +151,19 @@ with connection:
             'SET nome=%s, idade=%s '
             'WHERE id=%s'
         )
-        cursor.execute(sql, ('Eleonor', 102, 4))  # type: ignore
-        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  # type: ignore
+        cursor.execute(sql, ('Eleonor', 102, 4))
+        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
 
-        # for row in cursor.fetchall():  # type: ignore
-        #     _id, name, age = row
-        #     print(_id, name, age)
+        print('For 1: ')
+        for row in cursor.fetchall_unbuffered():
+            print(row)
 
-        for row in cursor.fetchall():  # type: ignore
+            if row['id'] >= 5:
+                break
+
+        print()
+        print('For 2: ')
+        # cursor.scroll(-1)
+        for row in cursor.fetchall_unbuffered():
             print(row)
     connection.commit()

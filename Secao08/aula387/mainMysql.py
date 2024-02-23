@@ -72,7 +72,6 @@ with connection:
         print(result)
     connection.commit()
 
-
     # Inserindo vários valores usando placeholder e um tupla de dicionários
     with connection.cursor() as cursor:
         sql = (

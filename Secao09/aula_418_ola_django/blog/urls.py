@@ -1,6 +1,5 @@
+from blog import views
 from django.urls import path
-
-from . import views
 
 app_name = 'blog'
 
@@ -9,6 +8,6 @@ app_name = 'blog'
 # https://docs.djangoproject.com/en/4.2/topics/http/urls/
 urlpatterns = [
     path('', views.blog, name='home'),
-    path('post/<int:id>', views.post, name='post'),
+    path('<int:id>/', views.post, name='post'),
     path('exemplo/', views.exemplo, name='exemplo'),
 ]
